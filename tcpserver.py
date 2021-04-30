@@ -13,7 +13,7 @@ while True:
         print('Connected by', addr)
         while True:
             data = conn.recv(1024)
-            print(data)
+            print(data.decode())
             if not data:
                 break #TODO
             if data == b'':
