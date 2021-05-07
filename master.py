@@ -1,6 +1,8 @@
 import tcpserver
 import sys
 import BTS7960HBridgePCA9685 as HBridge
+import os
+import readchar
 
 # Variablen Definition der linken und rechten Geschwindigkeit der
 # Motoren des Roboter-Autos.
@@ -41,7 +43,7 @@ def printscreen():
 #Abarbeitungsschleife
 
 while True:
-    tcpserver.server()
+    #tcpserver.server()
     printscreen()
 
 
