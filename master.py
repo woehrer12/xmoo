@@ -42,7 +42,7 @@ def printscreen():
 
 while True:
     tcpserver.server()
-
+    printscreen()
 
 
     # Mit dem Aufruf der Funktion getch() wird die Tastatureingabe 
