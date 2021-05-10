@@ -14,13 +14,13 @@ def server():
         conn, addr = s.accept()
         with conn:
             print('Connected by', addr)
-            while True:
-                data = conn.recv(1024)
-                print(data.decode())
-                if not data:
-                    break #TODO
-                if data == b'':
-                    break #TODO
-                conn.sendall(data)
+            #while True:
+            data = conn.recv(1024)
+            print(data.decode())
+            if not data:
+                pass #TODO
+            if data == b'':
+                pass #TODO
+            conn.sendall(data)
     except:
         print("Unexpected error typserver.py server(): " + str(sys.exc_info()))

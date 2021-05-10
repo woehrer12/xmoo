@@ -43,7 +43,7 @@ def printscreen():
 #Abarbeitungsschleife
 
 while True:
-    #tcpserver.server()
+    tcpserver.server()
     printscreen()
 
 
