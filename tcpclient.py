@@ -12,7 +12,7 @@ def connect():
     try:
         s.connect((HOST, PORT))
     except:
-        print("Unexpected error typclient.py connect(): " + str(sys.exc_info()))
+        print("Unexpected error tcpclient.py connect(): " + str(sys.exc_info()))
 
 def send(data_send):
     try:
@@ -23,7 +23,7 @@ def send(data_send):
         else:
             return False
     except:
-        print("Unexpected error typclient.py send(): " + str(sys.exc_info()))
+        print("Unexpected error tcpclient.py send(): " + str(sys.exc_info()))
         return False
 
 def close():
