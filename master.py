@@ -33,13 +33,6 @@ def printscreen():
    print("Geschwindigkeit linker Motor:  ", speedleft)
    print("Geschwindigkeit rechter Motor: ", speedright)
 
-
-
-
-
-
-
-
 #Abarbeitungsschleife
 
 while True:
