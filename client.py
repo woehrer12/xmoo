@@ -47,6 +47,12 @@ def left(*args):
     tcpclient.send(data.encode())
     pass
 
+def stop(*args):
+    print("STOP")
+    data = "direction: STOP"
+    tcpclient.send(data.encode())
+    pass
+
 
 # Ein Fenster erstellen
 fenster = Tk()
@@ -58,6 +64,7 @@ up_Button = Button(fenster, text = "UP", command=up, height = 2)
 right_Button = Button(fenster, text = "RIGHT", command=right, height = 2)
 left_Button = Button(fenster, text = "LEFT", command=left, height = 2)
 down_Button = Button(fenster, text = "DOWN", command=down, height = 2)
+stop_Button = Button(fenster, text= "STOP", command =stop , height = 2)
 connect_Button = Button(fenster, text = "Connect", command=tcpclient.connect, height = 2,bg="red")
 
 #Key Bindings
@@ -69,6 +76,7 @@ fenster.bind('<Down>',down)
 fenster.bind('s',down)
 fenster.bind('<Right>',right)
 fenster.bind('d',right)
+fenster.bind('q',stop)
 
 
 
@@ -80,6 +88,7 @@ up_Button.pack()
 left_Button.pack(padx=5, pady=10, side=LEFT)
 down_Button.pack(padx=5, pady=10, side=LEFT)
 right_Button.pack(padx=5, pady=10, side=LEFT)
+stop_Button.pack(padx=5,pady=20)
 
 
 
