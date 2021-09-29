@@ -3,15 +3,16 @@
 import socket
 import sys
 
-HOST = '0.0.0.0'  # Standard loopback interface address (localhost)
-PORT = 65432        # Port to listen on (non-privileged ports are > 1023)
-
 class TCP():
 
     def __init__(self):
         self.Direction = ""
         self.Ping = 0
     
+    def setHostPort(self,Host,Port):
+        self.Host = Host
+        self.Port = Port
+
     def getDirection(self):
         return self.Direction
     
@@ -22,7 +23,7 @@ class TCP():
         while True:
             try:
                 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-                s.bind((HOST, PORT))
+                s.bind((self.Host, self.Port))
                 s.listen()
                 conn, addr = s.accept()
                 with conn:

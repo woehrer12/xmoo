@@ -20,6 +20,7 @@ def printscreen():
 #Abarbeitungsschleife
 
 TcpServer = TCPSERVER.TCP()
+TcpServer.setHostPort('0.0.0.0',65432)
 prozess = threading.Thread(target=TcpServer.server,args=())
 prozess.start()
 
