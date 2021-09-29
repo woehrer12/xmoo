@@ -7,13 +7,19 @@ import os
 #import tcpclient
 import TCPCLIENT
 import sys
+import TCPSERVER
+import threading
 
 programmstart = time.time()
 
 TcpClient = TCPCLIENT.TCP_CLIENT()
+TcpClient.setHostPort('xmoo-master.local',65432)
+TcpClient.connect()
 
-#tcpclient.connect()
-
+TcpServer = TCPSERVER.TCP()
+TcpServer.setHostPort('0.0.0.0',65431)
+prozess = threading.Thread(target=TcpServer.server,args=())
+prozess.start()
 
 def tick():
     checkconnection()
@@ -47,7 +53,6 @@ def left(*args):
 def stop(*args):
     data = "direction: STOP"
     TcpClient.send(data.encode())
-    TcpClient.close()
 
 # Ein Fenster erstellen
 fenster = Tk()

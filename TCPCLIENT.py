@@ -3,18 +3,19 @@
 import socket
 import sys
 
-HOST = 'xmoo-master.local'  # The server's hostname or IP address
-PORT = 65432        # The port used by the server
-
 class TCP_CLIENT():
 
     def __init__(self):
         self.s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
+    def setHostPort(self,Host,Port):
+        self.Host = Host
+        self.Port = Port
+
     def connect(self):
         try:
             self.s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-            self.s.connect((HOST, PORT))
+            self.s.connect((self.Host, self.Port))
         except:
             print("Unexpected error tcpclient.py connect(): " + str(sys.exc_info()))
 
@@ -28,6 +29,7 @@ class TCP_CLIENT():
                 return False
         except:
             print("Unexpected error tcpclient.py send(): " + str(sys.exc_info()))
+            self.connect()
             return False
 
     def close(self):
