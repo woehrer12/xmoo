@@ -1,14 +1,18 @@
+from TCPCLIENT import TCP_CLIENT
 from tkinter import *
 import time
 from time import gmtime, strftime
 import configparser
 import os
-import tcpclient
+#import tcpclient
+import TCPCLIENT
 import sys
 
 programmstart = time.time()
 
-tcpclient.connect()
+TcpClient = TCPCLIENT.TCP_CLIENT()
+
+#tcpclient.connect()
 
 
 def tick():
@@ -18,41 +22,32 @@ def tick():
 def checkconnection():
     data = int(time.time() - programmstart + 1)
     data = "ping: " + str(data)
-    if tcpclient.send(data.encode()):
+    if TcpClient.send(data.encode()):
         connect_Button.config(bg="green")
     else:
         connect_Button.config(bg="red")
 
 
 def up(*args):
-    print("UP")
     data = "direction: UP"
-    tcpclient.send(data.encode())
+    TcpClient.send(data.encode())
 
 def down(*args):
-    print("DOWN")
     data = "direction: DOWN"
-    tcpclient.send(data.encode())
-    pass
+    TcpClient.send(data.encode())
 
 def right(*args):
-    print("RIGHT")
     data = "direction: RIGHT"
-    tcpclient.send(data.encode())
-    pass
+    TcpClient.send(data.encode())
 
 def left(*args):
-    print("LEFT")
     data = "direction: LEFT"
-    tcpclient.send(data.encode())
-    pass
+    TcpClient.send(data.encode())
 
 def stop(*args):
-    print("STOP")
     data = "direction: STOP"
-    tcpclient.send(data.encode())
-    pass
-
+    TcpClient.send(data.encode())
+    TcpClient.close()
 
 # Ein Fenster erstellen
 fenster = Tk()
@@ -60,12 +55,12 @@ fenster = Tk()
 fenster.title("xMoo Steuerung")
 
 # Buttons erstellen
-up_Button = Button(fenster, text = "UP", command=up, height = 2)
-right_Button = Button(fenster, text = "RIGHT", command=right, height = 2)
-left_Button = Button(fenster, text = "LEFT", command=left, height = 2)
-down_Button = Button(fenster, text = "DOWN", command=down, height = 2)
-stop_Button = Button(fenster, text= "STOP", command =stop , height = 2)
-connect_Button = Button(fenster, text = "Connect", command=tcpclient.connect, height = 2,bg="red")
+up_Button = Button(fenster, text = "UP (w)", command=up, height = 2)
+right_Button = Button(fenster, text = "RIGHT (d)", command=right, height = 2)
+left_Button = Button(fenster, text = "LEFT(a)", command=left, height = 2)
+down_Button = Button(fenster, text = "DOWN (s)", command=down, height = 2)
+stop_Button = Button(fenster, text= "STOP (q)", command =stop , height = 2)
+connect_Button = Button(fenster, text = "Connect", command=TcpClient.connect, height = 2,bg="red")
 
 #Key Bindings
 fenster.bind('<Up>',up)
