@@ -1,4 +1,3 @@
-from TCPCLIENT import TCP_CLIENT
 from tkinter import *
 import time
 from time import gmtime, strftime
