@@ -5,13 +5,12 @@ import sys
 
 HOST = '0.0.0.0'  # Standard loopback interface address (localhost)
 PORT = 65432        # Port to listen on (non-privileged ports are > 1023)
-#while True:
+
 class TCP():
 
     def __init__(self):
         self.Direction = ""
         self.Ping = 0
-        pass
     
     def getDirection(self):
         return self.Direction
@@ -51,5 +50,6 @@ class TCP():
                             pass #TODO
                         conn.sendall(data)
             except:
+                s.close()
                 self.Direction = "STOP"
                 print("Unexpected error typserver.py server(): " + str(sys.exc_info()))
