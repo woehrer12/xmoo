@@ -8,6 +8,7 @@ class TCP():
     def __init__(self):
         self.Direction = ""
         self.Ping = 0
+        self.IP = False
     
     def setHostPort(self,Host,Port):
         self.Host = Host
@@ -18,6 +19,7 @@ class TCP():
     
     def setDirection0(self):
         self.Direction = ""
+        self.Ping = ""
 
     def server(self):
         while True:
@@ -27,23 +29,26 @@ class TCP():
                 s.listen()
                 conn, addr = s.accept()
                 with conn:
-                    print('Connected by', addr)
+                    self.IP = addr[0]
+                    #print('Connected by', addr)
                     while True:
                         data = conn.recv(1024)
                         #print(data.decode())
                         daten = data.decode().split()
-                        print(daten)
+                        #print(daten)
                         if daten[0] == "ping:":
-                            print("Ping" + daten[1])
+                            #print("Ping" + daten[1])
+                            self.Ping = daten[1]
+
                         if daten[0] == "direction:":
-                            print("Direction" + daten[1])
+                            #print("Direction" + daten[1])
                             self.Direction = daten[1]
-                        print(self.Direction)
+                        #print(self.Direction)
                         
                         #self.Direction = data.decode()
                         if not data:
                             self.Direction = "STOP"
-                            print("STOPPPPPPP!!!!!")
+                            #print("STOPPPPPPP!!!!!")
                             pass #TODO
                         if data == b'':
                             self.Direction = "STOP"
@@ -52,5 +57,6 @@ class TCP():
                         conn.sendall(data)
             except:
                 s.close()
+                self.IP = False
                 self.Direction = "STOP"
                 print("Unexpected error typserver.py server(): " + str(sys.exc_info()))

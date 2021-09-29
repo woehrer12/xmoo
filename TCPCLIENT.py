@@ -7,6 +7,7 @@ class TCP_CLIENT():
 
     def __init__(self):
         self.s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        self.connected = False
 
     def setHostPort(self,Host,Port):
         self.Host = Host
@@ -16,7 +17,9 @@ class TCP_CLIENT():
         try:
             self.s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
             self.s.connect((self.Host, self.Port))
+            self.connected = True
         except:
+            self.connected = False
             print("Unexpected error tcpclient.py connect(): " + str(sys.exc_info()))
 
     def send(self, data_send):
@@ -26,13 +29,16 @@ class TCP_CLIENT():
             if data_send == data:
                 return True
             else:
+                self.connected = False
                 return False
         except:
             print("Unexpected error tcpclient.py send(): " + str(sys.exc_info()))
+            self.connected = False
             self.connect()
             return False
 
     def close(self):
+        self.connected = False
         self.s.close()
 
 
