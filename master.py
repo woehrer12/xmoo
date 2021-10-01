@@ -1,5 +1,5 @@
 import TCPSERVER
-import TCPCLIENT
+#import TCPCLIENT
 import sys
 import BTS7960HBridgePCA9685 as HBridge
 import os
@@ -25,7 +25,7 @@ def printscreen():
 
 #Abarbeitungsschleife
 
-TcpClient = TCPCLIENT.TCP_CLIENT()
+#TcpClient = TCPCLIENT.TCP_CLIENT()
 
 TcpServer = TCPSERVER.TCP()
 TcpServer.setHostPort('0.0.0.0',65432)
@@ -33,15 +33,16 @@ prozess = threading.Thread(target=TcpServer.server,args=())
 prozess.start()
 
 while True:
-    if TcpServer.IP and not TcpClient.connected:
-        print(TcpServer.IP)
-        print(type(TcpServer.IP))
-        TcpClient.setHostPort(TcpServer.IP,65431)
-        TcpClient.connect()
+    # if TcpServer.IP and not TcpClient.connected:
+    #     print(TcpServer.IP)
+    #     print(type(TcpServer.IP))
+    #     TcpClient.setHostPort(TcpServer.IP,65431)
+    #     TcpClient.connect()
     printscreen()
     if(TcpServer.getDirection() == "UP"):
         speedleft = speedleft + 0.1
         speedright = speedright + 0.1
+
         if speedleft > 1:
             speedleft = 1
         if speedright > 1:
@@ -66,6 +67,7 @@ while True:
         speedright = 0
         HBridge.setMotorLeft(0)
         HBridge.setMotorRight(0)
+        HBridge.exit()
 
     if(TcpServer.getDirection() == "RIGHT"):      
         speedright = speedright - 0.1

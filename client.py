@@ -6,7 +6,7 @@ import os
 #import tcpclient
 import TCPCLIENT
 import sys
-import TCPSERVER
+#import TCPSERVER
 import threading
 
 programmstart = time.time()
@@ -15,10 +15,10 @@ TcpClient = TCPCLIENT.TCP_CLIENT()
 TcpClient.setHostPort('xmoo-master.local',65432)
 TcpClient.connect()
 
-TcpServer = TCPSERVER.TCP()
-TcpServer.setHostPort('0.0.0.0',65431)
-prozess = threading.Thread(target=TcpServer.server,args=())
-prozess.start()
+# TcpServer = TCPSERVER.TCP()
+# TcpServer.setHostPort('0.0.0.0',65431)
+# prozess = threading.Thread(target=TcpServer.server,args=())
+# prozess.start()
 
 def tick():
     checkconnection()
