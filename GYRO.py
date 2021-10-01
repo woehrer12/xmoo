@@ -50,28 +50,41 @@ class GYRO():
         gyroskop_yout = self.read_word_2c(0x45)
         gyroskop_zout = self.read_word_2c(0x47)
         
-        print("gyroskop_xout: ", ("%5d" % gyroskop_xout), " skaliert: ", (gyroskop_xout / 131))
-        print("gyroskop_yout: ", ("%5d" % gyroskop_yout), " skaliert: ", (gyroskop_yout / 131))
-        print("gyroskop_zout: ", ("%5d" % gyroskop_zout), " skaliert: ", (gyroskop_zout / 131))
+        # print("gyroskop_xout: ", ("%5d" % gyroskop_xout), " skaliert: ", (gyroskop_xout / 131))
+        # print("gyroskop_yout: ", ("%5d" % gyroskop_yout), " skaliert: ", (gyroskop_yout / 131))
+        # print("gyroskop_zout: ", ("%5d" % gyroskop_zout), " skaliert: ", (gyroskop_zout / 131))
         
-        print()
-        print("Beschleunigungssensor")
-        print("---------------------")
+        self.gyroskop_xout_skaliert = gyroskop_xout / 131
+        self.gyroskop_yout_skaliert = gyroskop_yout / 131
+        self.gyroskop_zout_skaliert = gyroskop_zout / 131
+
+        # print()
+        # print("Beschleunigungssensor")
+        # print("---------------------")
         
         beschleunigung_xout = self.read_word_2c(0x3b)
         beschleunigung_yout = self.read_word_2c(0x3d)
         beschleunigung_zout = self.read_word_2c(0x3f)
         
-        beschleunigung_xout_skaliert = beschleunigung_xout / 16384.0
-        beschleunigung_yout_skaliert = beschleunigung_yout / 16384.0
-        beschleunigung_zout_skaliert = beschleunigung_zout / 16384.0
+        self.beschleunigung_xout_skaliert = beschleunigung_xout / 16384.0
+        self.beschleunigung_yout_skaliert = beschleunigung_yout / 16384.0
+        self.beschleunigung_zout_skaliert = beschleunigung_zout / 16384.0
         
-        print("beschleunigung_xout: ", ("%6d" % beschleunigung_xout), " skaliert: ", beschleunigung_xout_skaliert)
-        print("beschleunigung_yout: ", ("%6d" % beschleunigung_yout), " skaliert: ", beschleunigung_yout_skaliert)
-        print("beschleunigung_zout: ", ("%6d" % beschleunigung_zout), " skaliert: ", beschleunigung_zout_skaliert)
+        # print("beschleunigung_xout: ", ("%6d" % beschleunigung_xout), " skaliert: ", beschleunigung_xout_skaliert)
+        # print("beschleunigung_yout: ", ("%6d" % beschleunigung_yout), " skaliert: ", beschleunigung_yout_skaliert)
+        # print("beschleunigung_zout: ", ("%6d" % beschleunigung_zout), " skaliert: ", beschleunigung_zout_skaliert)
         
-        print("X Rotation: " , self.get_x_rotation(beschleunigung_xout_skaliert, beschleunigung_yout_skaliert, beschleunigung_zout_skaliert))
-        print("Y Rotation: " , self.get_y_rotation(beschleunigung_xout_skaliert, beschleunigung_yout_skaliert, beschleunigung_zout_skaliert))
+        # print("X Rotation: " , self.get_x_rotation(beschleunigung_xout_skaliert, beschleunigung_yout_skaliert, beschleunigung_zout_skaliert))
+        # print("Y Rotation: " , self.get_y_rotation(beschleunigung_xout_skaliert, beschleunigung_yout_skaliert, beschleunigung_zout_skaliert))
 
-Gyro = GYRO()
-Gyro.request()
+    def json(self):
+        data = {'X' : self.gyroskop_xout_skaliert,
+                'Y' : self.gyroskop_yout_skaliert,
+                'Z' : self.gyroskop_zout_skaliert,
+                'Beschleunigung' : {
+                    'X' : self.beschleunigung_xout_skaliert,
+                    'Y' : self.beschleunigung_yout_skaliert,
+                    'Z' : self.beschleunigung_zout_skaliert,
+                }
+                }
+        return data

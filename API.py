@@ -1,12 +1,9 @@
 # https://programminghistorian.org/en/lessons/creating-apis-with-python-and-flask#implementing-our-api
 import flask
-import json
 from flask import request, jsonify
-import mysql.connector
-import configparser
-import sys
-import time
+import GYRO
 
+Gyro = GYRO.GYRO()
 
 app = flask.Flask(__name__)
 
@@ -14,9 +11,10 @@ app = flask.Flask(__name__)
 
 @app.route('/api/telemetrie', methods=['GET'])
 def telemetrie():
-    results = {}
-    results['Telemetrie'] = "Telemetrie"
-    return results
+    Gyro.request()
+    results = {'Telemetrie' : {"Gyro" : {}}}
+    results['Telemetrie']['Gyro'] = Gyro.json()
+    return jsonify(results)
 
 @app.errorhandler(404)
 def page_not_found(e):
