@@ -1,6 +1,4 @@
 import TCPSERVER
-#import TCPCLIENT
-import sys
 import BTS7960HBridgePCA9685 as HBridge
 import os
 import threading
@@ -18,14 +16,10 @@ def printscreen():
     print("========== Geschwindigkeitsanzeige ==========")
     print("Geschwindigkeit linker Motor:  ", speedleft)
     print("Geschwindigkeit rechter Motor: ", speedright)
-    if not TcpClient.connected:
-        print("Telemetrie not connected")
     print(TcpServer.Ping)
     print(TcpServer.getDirection())
 
 #Abarbeitungsschleife
-
-#TcpClient = TCPCLIENT.TCP_CLIENT()
 
 TcpServer = TCPSERVER.TCP()
 TcpServer.setHostPort('0.0.0.0',65432)
@@ -33,11 +27,6 @@ prozess = threading.Thread(target=TcpServer.server,args=())
 prozess.start()
 
 while True:
-    # if TcpServer.IP and not TcpClient.connected:
-    #     print(TcpServer.IP)
-    #     print(type(TcpServer.IP))
-    #     TcpClient.setHostPort(TcpServer.IP,65431)
-    #     TcpClient.connect()
     printscreen()
     if(TcpServer.getDirection() == "UP"):
         speedleft = speedleft + 0.1
