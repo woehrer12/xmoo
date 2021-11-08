@@ -56,7 +56,7 @@ while True:
         speedright = 0
         HBridge.setMotorLeft(0)
         HBridge.setMotorRight(0)
-        HBridge.exit()
+        #HBridge.exit()
 
     if(TcpServer.getDirection() == "RIGHT"):      
         speedright = speedright - 0.1

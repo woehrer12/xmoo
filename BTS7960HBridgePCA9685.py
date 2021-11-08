@@ -161,8 +161,6 @@ def setMotorLeft(power):
       # Stoppmodus fuer den linken Motor
       PCA9685_pwm.set_pwm(0, 0, 0)
       PCA9685_pwm.set_pwm(1, 0, 0)  
-      PCA9685_pwm.set_pwm(2, 0, 0)
-      PCA9685_pwm.set_pwm(3, 0, 0)	
 
 # Die Funktion setMotorRight(power) setzt die Geschwindigkeit der 
 # rechten Motoren. Die Geschwindigkeit wird als Wert zwischen -1 
@@ -197,8 +195,6 @@ def setMotorRight(power):
       PCA9685_pwm.set_pwm(3, 0, pwm)  	  
    else:
       # Stoppmodus fuer den rechten Motor
-      PCA9685_pwm.set_pwm(0, 0, 0)
-      PCA9685_pwm.set_pwm(1, 0, 0)  
       PCA9685_pwm.set_pwm(2, 0, 0)
       PCA9685_pwm.set_pwm(3, 0, 0)	
 	  

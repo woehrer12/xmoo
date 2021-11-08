@@ -5,10 +5,10 @@ import PS4CONTROLLER
 import webbrowser
 import threading
 
-Ps4Controller = PS4CONTROLLER.PS4()
+#Ps4Controller = PS4CONTROLLER.PS4()
 
-prozess = threading.Thread(target=Ps4Controller.start,args=())
-prozess.start()
+#prozess = threading.Thread(target=Ps4Controller.start,args=())
+#prozess.start()
 
 programmstart = time.time()
 
@@ -21,7 +21,7 @@ def callback(url):
 
 def tick():
     checkconnection()
-    checkPS4Controller()
+    #checkPS4Controller()
     fenster.after(1000, tick) 
 
 def checkconnection():
